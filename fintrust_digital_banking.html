@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>fintrust_digital_bankink</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>fintrust_digital_banking</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7800,21 +7800,21 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
 
 <span class="n">custom_css</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">&lt;style&gt;</span>
-<span class="s2">    /* Police globale et fond */</span>
+<span class="s2">    /* Overall and background fonts */</span>
 <span class="s2">    body, .jp-Notebook {</span>
 <span class="s2">        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif !important;</span>
 <span class="s2">        color: #1e293b !important;</span>
 <span class="s2">        line-height: 1.6 !important;</span>
 <span class="s2">    }</span>
 <span class="s2">    </span>
-<span class="s2">    /* Titres principaux (H1, H2, H3) */</span>
+<span class="s2">    /* Main titles (H1, H2, H3) */</span>
 <span class="s2">    h1 {</span>
 <span class="s2">        color: #0f172a !important;</span>
 <span class="s2">        border-bottom: 3px solid #2563eb !important;</span>
@@ -7835,7 +7835,7 @@ a.anchor-link {
 <span class="s2">        font-weight: 600 !important;</span>
 <span class="s2">    }</span>
 <span class="s2">    </span>
-<span class="s2">    /* Tableaux Markdown stylisés */</span>
+<span class="s2">    /* Stylised Markdown tables */</span>
 <span class="s2">    table {</span>
 <span class="s2">        border-collapse: collapse !important;</span>
 <span class="s2">        width: 100% !important;</span>
@@ -7863,7 +7863,7 @@ a.anchor-link {
 <span class="s2">        background-color: #f1f5f9 !important;</span>
 <span class="s2">    }</span>
 <span class="s2">    </span>
-<span class="s2">    /* Encadrés de remarques / Blockquotes */</span>
+<span class="s2">    /* Blockquotes */</span>
 <span class="s2">    blockquote {</span>
 <span class="s2">        background-color: #eff6ff !important;</span>
 <span class="s2">        border-left: 5px solid #2563eb !important;</span>
@@ -7886,7 +7886,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
     /* Police globale et fond */
@@ -7967,7 +7967,8 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="FinTrust-Digital-Bank-%E2%80%94-Risk-Intelligence-&amp;-Predictive-Modeling">FinTrust Digital Bank — Risk Intelligence &amp; Predictive Modeling<a class="anchor-link" href="#FinTrust-Digital-Bank-%E2%80%94-Risk-Intelligence-&amp;-Predictive-Modeling">¶</a></h1><p><strong>Track:</strong> Data Science<br/>
-<strong>Phase:</strong> Week 1 — Problem Definition, Target Assessment &amp; Data Profiling</p>
+<strong>Phase:</strong> Week 1 — Problem Definition, Target Assessment &amp; Data Profiling<br/>
+<strong>Author:</strong> Dorian NJAMI - Certified Data Scientist</p>
 <hr/>
 <h2 id="1.-Executive-Context-&amp;-Business-Understanding">1. Executive Context &amp; Business Understanding<a class="anchor-link" href="#1.-Executive-Context-&amp;-Business-Understanding">¶</a></h2><p>FinTrust Digital Bank is scaling its digital financial services across transactions and customer operations. To maintain platform integrity and mitigate operational risk, the bank requires an automated predictive capability to identify high-risk financial transactions in real time.</p>
 <h3 id="1.1-Predictive-Problem-Statement-(Part-A)">1.1 Predictive Problem Statement (Part A)<a class="anchor-link" href="#1.1-Predictive-Problem-Statement-(Part-A)">¶</a></h3><ul>
@@ -8322,7 +8323,7 @@ dtype: int64
 <li>Encode categorical variables using One-Hot Encoding for nominal variables and Ordinal Encoding for <code>Monthly_Income_Band</code></li>
 <li>Apply <code>RobustScaler</code> or <code>StandardScaler</code> to numerical attributes (<code>Amount_NGN</code>, <code>Tenure_Months</code>, <code>Digital_Engagement_Score</code>) to handle skewness.</li>
 </ul>
-<h3 id="2.2.2-Exploratory-Analysis-(EDA)">2.2.2 Exploratory Analysis (EDA)<a class="anchor-link" href="#2.2.2-Exploratory-Analysis-(EDA)">¶</a></h3><ul>
+<h4 id="2.2.2-Exploratory-Analysis-(EDA)">2.2.2 Exploratory Analysis (EDA)<a class="anchor-link" href="#2.2.2-Exploratory-Analysis-(EDA)">¶</a></h4><ul>
 <li>Analyze the target distribution of <code>Risk_Review_Flag</code> to quantify class imbalance</li>
 <li><strong>Testing Hypothesis 1 ($H_1$):</strong> Perform a Mann-Whitney U test comparing <code>Amount_NGN</code> distributions across <code>Risk_Review_Flag</code> classes</li>
 <li><strong>Testing Hypothesis 2 ($H_2$):</strong> Execute a Chi-Square ($\chi^2$) Test of Independence between missing/unverified <code>Device_Type</code> and <code>Risk_Review_Flag</code></li>
