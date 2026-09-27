@@ -1,11 +1,11 @@
 # FinTrust Digital Banking — Risk Review & Behavioral Analytics
 
-## 📌 Project Overview
+## Project Overview
 FinTrust Digital Banking seeks to optimize its transaction risk review process by detecting anomalous behavior and potential fraud indicators across customer profiles and transaction metadata.
 
 This repository contains the end-to-end Machine Learning pipeline designed to analyze customer-transaction behaviors, test risk hypotheses, build 16 domain-engineered features, and evaluate predictive models for the `Risk_Review_Flag` target variable.
 
-## 🛠️ Key Project Deliverables & Phasing
+## Key Project Deliverables & Phasing
 
 ### Phase I & II: Problem Formulation & Exploratory Data Analysis
 * **Candidate Features Assessment**: Merged `Customer` and `Transaction` datasets on `Customer_ID`. Evaluated candidate features across demographic profiles and transactional metadata
@@ -28,7 +28,7 @@ This repository contains the end-to-end Machine Learning pipeline designed to an
    * Documented artifact bias and distorted prior probabilities inherent to algorithmically generated benchmark datasets (e.g., artificial ~20% prevalence vs. <1-2% real-world fraud)
    * Outlined future calibration (Platt Scaling) and explainability (SHAP / LIME) roadmaps.
 
-## 📊 Performance Summary
+## Performance Summary
 
 | Model | Accuracy | Precision | Recall | F1-Score | PR-AUC | Key Operational Role |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
@@ -38,7 +38,7 @@ This repository contains the end-to-end Machine Learning pipeline designed to an
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```text
 .
