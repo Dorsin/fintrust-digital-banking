@@ -3,31 +3,38 @@
 ## 📌 Project Overview
 FinTrust Digital Banking seeks to optimize its transaction risk review process by detecting anomalous behavior and potential fraud indicators across customer profiles and transaction metadata.
 
-This repository contains the end-to-end Machine Learning pipeline designed to analyze customer-transaction behaviors, test risk hypotheses, and build predictive and anomaly detection models for the `Risk_Review_Flag` target variable.
+This repository contains the end-to-end Machine Learning pipeline designed to analyze customer-transaction behaviors, test risk hypotheses, build 16 domain-engineered features, and evaluate predictive models for the `Risk_Review_Flag` target variable.
 
----
+## 🛠️ Key Project Deliverables & Phasing
 
-## 🛠️ Key Deliverables (Phase II: Prepare)
+### Phase I & II: Problem Formulation & Exploratory Data Analysis
+* **Candidate Features Assessment**: Merged `Customer` and `Transaction` datasets on `Customer_ID`. Evaluated candidate features across demographic profiles and transactional metadata
+* **Risk Factor Hypotheses Formulation**: Formulated and statistically tested 4 core hypotheses ($H_1$ to $H_4$) covering amount-to-income ratios, unverified device flags, account maturity risks, and cross-border channel exposures
 
-### 1. Candidate Features Assessment (Part C)
-* Merged `Customer` and `Transaction` datasets using an inner join on `Customer_ID`
-* Selected and evaluated 12 candidate features combining demographic profiles and transactional patterns (`Amount_NGN`, `Device_Type`, `Location`, `International_Transaction`, `Monthly_Income_Band`, etc.)
-* Documented feature selection rationale using domain risk analysis, non-linear association metrics ($\chi^2$, Mutual Information), and missingness handling strategies.
+### Phase III: Data Preparation, Feature Engineering & Modeling (Week 2)
+1. **Prepared Modelling Dataset (`exports/prepared_modelling_dataset.csv`)**:
+   * Engineered **16 predictive features** covering temporal indicators (`Is_Night_Transaction`, `Is_Weekend_Transaction`), behavioral frequency ratios (`Transaction_Frequency`, `Amount_To_Customer_Avg_Ratio`), channel mismatches, and composite risk flags (`New_Account_High_Risk`)
+   * Maintained raw categorical data in the exported dataset to prevent data leakage, handling One-Hot Encoding and scaling dynamically inside Scikit-Learn pipelines
 
-### 2. Risk Factor Hypotheses (Part D)
-Formulated 4 statistically testable research hypotheses ($H_1$ through $H_4$) paired with explicit Null ($H_0$) and Alternative ($H_1$) formulations to guide Exploratory Data Analysis:
-* **H1 (Amount-to-Income Ratio):** Transaction amounts exceeding typical monthly income bands present a higher risk review rate
-* **H2 (Device Verification Anomaly):** Missing or unverified device types carry a significantly higher probability of risk flags
-* **H3 (Account Maturity Risk):** Low-tenure accounts executing high-frequency transfers exhibit elevated risk review rates
-* **H4 (Cross-Border Channel Exposure):** Web-based international transactions display higher risk exposure compared to domestic mobile transactions.
+2. **Imbalanced Evaluation Strategy (PR-AUC Focus)**:
+   * Shifted from ROC-AUC to **Precision-Recall AUC (PR-AUC)** due to the ~19.58% class imbalance in the target variable
+   * Benchmarked model performance against a **0.1958 random guess chance baseline**
 
-### 3. Initial Modelling Plan (Part E)
-Established a 9-stage modeling architecture covering:
-* **Data Preparation & Scaling:** One-Hot Encoding, Ordinal Mapping, Robust Scaling
-* **Hypothesis Testing:** Non-parametric Mann-Whitney U tests and Chi-Square independence tests
-* **Feature Engineering:** Ratio engineering, interaction terms, and missingness indicators
-* **Model Benchmarks & Algorithms:** Logistic Regression baseline, Ensemble methods (Random Forest, XGBoost), PyTorch MLP, and Unsupervised Anomaly Detection (Isolation Forest, Autoencoders)
-* **Evaluation & Validation:** Stratified 5-Fold Cross-Validation evaluated via PR-AUC, F1-Score, and Recall
+3. **Model Benchmarking**:
+   * **Baseline Logistic Regression**: Achieved **PR-AUC = 0.3051** (Recall: 57.87%, Precision: 28.54%) with `class_weight='balanced'`
+   * **Advanced Random Forest**: Achieved **PR-AUC = 0.3050** (Accuracy: 70.17%, Recall: 41.91%, Precision: 30.78%), significantly reducing false alarm overhead (False Positives reduced from 681 to 443)
+
+4. **Synthetic Data & Bias Analysis**:
+   * Documented artifact bias and distorted prior probabilities inherent to algorithmically generated benchmark datasets (e.g., artificial ~20% prevalence vs. <1-2% real-world fraud)
+   * Outlined future calibration (Platt Scaling) and explainability (SHAP / LIME) roadmaps.
+
+## 📊 Performance Summary
+
+| Model | Accuracy | Precision | Recall | F1-Score | PR-AUC | Key Operational Role |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Random Guess Baseline** | — | 19.58% | 100.0% | — | **0.1958** | Uninformed baseline reference |
+| **Baseline Logistic Regression** | 63.38% | 28.54% | **57.87%** | **0.3823** | **0.3051** | High-coverage / risk-averse flagger |
+| **Advanced Random Forest** | **70.17%** | **30.78%** | 41.91% | 0.3550 | **0.3050** | Operational workload & false alarm reducer |
 
 ---
 
@@ -36,13 +43,18 @@ Established a 9-stage modeling architecture covering:
 ```text
 .
 ├── data/
-│   ├── FinTrust_Customer_Data.csv          # Customer demographic & account metadata
-│   ├── FinTrust_Data_Dictionary.xlsx       # Feature definitions & data dictionary
-│   └── FinTrust_Transaction_Data.csv       # Transaction activity records
+│   ├── FinTrust_Customer_Data.csv           # Customer demographic & account metadata
+│   ├── FinTrust_Data_Dictionary.xlsx        # Feature definitions & data dictionary
+│   └── FinTrust_Transaction_Data.csv        # Transaction activity records
+├── exports/
+│   └── prepared_modelling_dataset.csv       # Deliverable 1: Final feature-engineered dataset
 ├── notebooks/
-│   ├── 01_week1_problem_formulation.html  # Exported HTML version of Week 1 notebook
-│   └── 01_week1_problem_formulation.ipynb # Main Jupyter Notebook (Phase I & II)
-├── .gitignore                              # Git ignore rules for non-tracked files
-├── 01_week1_problem_formulation.pdf        # Clean exported PDF report (no code inputs)
-├── fintrust_digital_banking.html           # Full HTML export report
-└── README.md                               # Main project documentation
+│   ├── 01_week1_problem_formulation.html   # Week 1 notebook export (HTML)
+│   ├── 01_week1_problem_formulation.ipynb  # Week 1 Jupyter Notebook
+│   ├── 02_week2_data_prep_eda_modeling.html# Week 2 notebook export (HTML)
+│   └── 02_week2_data_prep_eda_modeling.ipynb# Main Week 2 Data Prep & Modeling Notebook
+├── .gitignore                               # Git ignore rules for non-tracked files
+├── 01_week1_problem_formulation.pdf        # Clean exported PDF report (Week 1)
+├── 02_week2_data_prep_eda_modeling_report.pdf # Executive PDF Report (Week 2)
+├── fintrust_digital_banking.html            # Full compiled HTML project report
+└── README.md                                # Main project documentation
